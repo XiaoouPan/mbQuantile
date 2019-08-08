@@ -10,9 +10,9 @@ This is simulation code for the working paper "Multiplier Bootstrap for Quantile
 
 Chen, K., Ying, Z., Zhang, H. and Zhao, L. (2008). Analysis of least absolute deviation. Biometrika 95 107–122. [Paper](https://academic.oup.com/biomet/article-abstract/95/1/107/219099)
 
-Chen, X. and Zhou, W.-X. (2019) Robust inference via multiplier bootstrap. Ann. Statist. to appear. [Paper](https://arxiv.org/abs/1903.07208)
-
 Feng, X., He, X. and Hu, J. (2011). Wild bootstrap for quantile regression. Biometrika 98 995–999. [Paper](https://academic.oup.com/biomet/article-abstract/98/4/995/234840)
+
+Koenker, R. (2005). Quantile Regression. Cambridge Univ. Press, Cambridge. [Book](https://www.cambridge.org/core/books/quantile-regression/C18AE7BCF3EC43C16937390D44A328B1)
 
 Koenker, R. (2018). Package ‘quantreg’. [CRAN](https://cran.r-project.org/web/packages/quantreg/index.html)
 
