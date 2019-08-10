@@ -6,6 +6,10 @@ Multiplier Bootstrap for Quantile Regression
 
 This is simulation code for the paper "Multiplier bootstrap for quantile regression: non-asymptotic theory under random design". See [this link](https://www.math.ucsd.edu/~xip024/QR_Boot.pdf) for the preprint. The code can reproduce numerical results in section 3.
 
+## Authors
+
+Xiaoou Pan <xip024@ucsd.edu>, Wen-Xin Zhou <wez243@ucsd.edu> 
+
 ## Main reference
 
 Chen, K., Ying, Z., Zhang, H. and Zhao, L. (2008). Analysis of least absolute deviation. Biometrika 95 107–122. [Paper](https://academic.oup.com/biomet/article-abstract/95/1/107/219099)
