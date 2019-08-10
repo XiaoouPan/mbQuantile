@@ -28,7 +28,7 @@ Koenker, R. (2018). Package ‘quantreg’. [CRAN](https://cran.r-project.org/we
 
 Koenker, R. and Bassett, G. (1978). Regression quantiles. Econometrica 46 33-50. [Paper](https://www.jstor.org/stable/1913643?seq=1#metadata_info_tab_contents)
 
-Pan, X. and Zhou, W.-X. (2019). Multiplier bootstrap for quantile regression: non-asymptotic theory under random design. [Paper](https://www.math.ucsd.edu/~xip024/QR_Boot.pdf) [Supplement](https://www.math.ucsd.edu/~xip024/QR_Supp.pdf)
+Pan, X. and Zhou, W.-X. (2019). Multiplier bootstrap for quantile regression: non-asymptotic theory under random design. [Paper](https://www.math.ucsd.edu/~xip024/QR_Boot.pdf)
 
 Parzen, M. I., Wei, L. J. and Ying, Z. (1994). A resampling method based on pivotal estimating functions. Biometrika 81 341–350. [Paper](https://academic.oup.com/biomet/article-abstract/81/2/341/468184)
 
