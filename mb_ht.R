@@ -97,13 +97,9 @@ for (m in 1:M) {
   }
   fit = rq(Y ~ X, tau = tau)
   res = as.numeric(fit$residuals)
-  #adj = hat(X) * (tau - (res < 0)) / akj(res, z = 0)$dens
-  #Yadj = Y - adj
   res0 = Y - median(Y)
   stat = sum(abs(res0)) - sum(abs(res))
   fit0 = rq(Y ~ 1, tau = tau)
-  #adj0 = (1 / n) * (tau - (res0 < 0)) / akj(res0, z = 0)$dens
-  #Yadj0 = Y - adj0
   ## 1. ANOVA, Wald test
   test = anova(fit, fit0, test = "Wald")
   rej[, 1] = rej[, 1] + as.numeric(as.numeric(test$table[4]) < alphaSeq)
@@ -130,14 +126,9 @@ for (m in 1:M) {
   }
   fit = rq(Y ~ X, tau = tau)
   res = as.numeric(fit$residuals)
-  #f0 = akj(res, z = 0)$dens
-  #adj = hat(X) * (tau - (res < 0)) / f0
-  #Yadj = Y - adj
   res0 = Y - median(Y)
   stat = sum(abs(res0)) - sum(abs(res))
   fit0 = rq(Y ~ 1, tau = tau)
-  #adj0 = (1 / n) * (tau - (res0 < 0)) / akj(res0, z = 0)$dens
-  #Yadj0 = Y - adj0
   ## 1. ANOVA, Wald test
   test = anova(fit, fit0, test = "Wald")
   rej[, 5] = rej[, 5] + as.numeric(as.numeric(test$table[4]) < alphaSeq)
@@ -164,14 +155,9 @@ for (m in 1:M) {
   }
   fit = rq(Y ~ X, tau = tau)
   res = as.numeric(fit$residuals)
-  #f0 = akj(res, z = 0)$dens
-  #adj = hat(X) * (tau - (res < 0)) / f0
-  #Yadj = Y - adj
   res0 = Y - median(Y)
   stat = sum(abs(res0)) - sum(abs(res))
   fit0 = rq(Y ~ 1, tau = tau)
-  #adj0 = (1 / n) * (tau - (res0 < 0)) / akj(res0, z = 0)$dens
-  #Yadj0 = Y - adj0
   ## 1. ANOVA, Wald test
   test = anova(fit, fit0, test = "Wald")
   rej[, 9] = rej[, 9] + as.numeric(as.numeric(test$table[4]) < alphaSeq)
