@@ -4,7 +4,7 @@ Multiplier Bootstrap for Quantile Regression
 
 ## Description
 
-In this project, we provide simulation code for the paper "Multiplier bootstrap for quantile regression: non-asymptotic theory under random design". See [this link](https://www.math.ucsd.edu/~xip024/QR_Boot.pdf) for the paper and [this link](https://www.math.ucsd.edu/~xip024/QR_Supp.pdf) for the supplement. The code can reproduce numerical results in Section 3 and Appendix B.
+We provide simulation code for the paper "Multiplier bootstrap for quantile regression: Non-asymptotic theory under random design". See [here](https://www.math.ucsd.edu/~xip024/QR_Boot.pdf) for the paper and [here](https://www.math.ucsd.edu/~xip024/QR_Supp.pdf) for the supplement. The code can reproduce numerical results in Section 3 and Appendix B.
 
 Specifically, to duplicate results in Section 3.1 and Appendix B.1, run the file **mb_ci.R**, to replicate results in Section 3.2 and Appendix B.2, run the file **mb_ht.R**. In both files, we allow the following various settings, with details stated in the paper:
 
