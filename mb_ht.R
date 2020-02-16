@@ -1,4 +1,6 @@
-## This file is used for simulation section, hypothesis testing in the paper
+#################################################
+#### Simulation codes for hypothesis testing ####
+#################################################
 rm(list = ls())
 
 library(quantreg)

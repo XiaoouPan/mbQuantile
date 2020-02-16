@@ -1,5 +1,6 @@
-## Power curve of hypothesis testing
-## This file is used for simulation section in the paper
+##########################################
+#### Simulation codes for power curve ####
+##########################################
 rm(list = ls())
 
 library(quantreg)

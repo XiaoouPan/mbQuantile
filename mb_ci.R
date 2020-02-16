@@ -1,4 +1,6 @@
-## This is the code for simulation section, confidence interval in paper
+##################################################
+#### Simulation codes for confidence interval ####
+##################################################
 rm(list = ls())
 
 library(quantreg)
@@ -174,32 +176,32 @@ for (m in 1:M) {
   adj = hat(X) * (tau - (res < 0)) / f0
   Yadj = Y - adj
   ## 1. Pairwise bootstrap, ET
-  #list = pairBoot(fit, betaHat, alphaSeq, B)
-  #lower005[1:d, m] = list$CI[, 1]
-  #upper005[1:d, m] = list$CI[, 2]
-  #lower01[1:d, m] = list$CI[, 3]
-  #upper01[1:d, m] = list$CI[, 4]
-  #lower02[1:d, m] = list$CI[, 5]
-  #upper02[1:d, m] = list$CI[, 6]
-  #elapsed[1] = elapsed[1] + list$elapsed 
+  list = pairBoot(fit, betaHat, alphaSeq, B)
+  lower005[1:d, m] = list$CI[, 1]
+  upper005[1:d, m] = list$CI[, 2]
+  lower01[1:d, m] = list$CI[, 3]
+  upper01[1:d, m] = list$CI[, 4]
+  lower02[1:d, m] = list$CI[, 5]
+  upper02[1:d, m] = list$CI[, 6]
+  elapsed[1] = elapsed[1] + list$elapsed 
   ## 2. Estimation function bootstrap, PWY
-  #list = efBoot(fit, betaHat, alphaSeq, B)
-  #lower005[(d + 1):(2 * d), m] = list$CI[, 1]
-  #upper005[(d + 1):(2 * d), m] = list$CI[, 2]
-  #lower01[(d + 1):(2 * d), m] = list$CI[, 3]
-  #upper01[(d + 1):(2 * d), m] = list$CI[, 4]
-  #lower02[(d + 1):(2 * d), m] = list$CI[, 5]
-  #upper02[(d + 1):(2 * d), m] = list$CI[, 6]
-  #elapsed[2] = elapsed[2] + list$elapsed 
+  list = efBoot(fit, betaHat, alphaSeq, B)
+  lower005[(d + 1):(2 * d), m] = list$CI[, 1]
+  upper005[(d + 1):(2 * d), m] = list$CI[, 2]
+  lower01[(d + 1):(2 * d), m] = list$CI[, 3]
+  upper01[(d + 1):(2 * d), m] = list$CI[, 4]
+  lower02[(d + 1):(2 * d), m] = list$CI[, 5]
+  upper02[(d + 1):(2 * d), m] = list$CI[, 6]
+  elapsed[2] = elapsed[2] + list$elapsed 
   ## 3. Wild bootstrap, FHH
-  #list = wildBoot(fit, betaHat, alphaSeq, B)
-  #lower005[(2 * d + 1):(3 * d), m] = list$CI[, 1]
-  #upper005[(2 * d + 1):(3 * d), m] = list$CI[, 2]
-  #lower01[(2 * d + 1):(3 * d), m] = list$CI[, 3]
-  #upper01[(2 * d + 1):(3 * d), m] = list$CI[, 4]
-  #lower02[(2 * d + 1):(3 * d), m] = list$CI[, 5]
-  #upper02[(2 * d + 1):(3 * d), m] = list$CI[, 6]
-  #elapsed[3] = elapsed[3] + list$elapsed
+  list = wildBoot(fit, betaHat, alphaSeq, B)
+  lower005[(2 * d + 1):(3 * d), m] = list$CI[, 1]
+  upper005[(2 * d + 1):(3 * d), m] = list$CI[, 2]
+  lower01[(2 * d + 1):(3 * d), m] = list$CI[, 3]
+  upper01[(2 * d + 1):(3 * d), m] = list$CI[, 4]
+  lower02[(2 * d + 1):(3 * d), m] = list$CI[, 5]
+  upper02[(2 * d + 1):(3 * d), m] = list$CI[, 6]
+  elapsed[3] = elapsed[3] + list$elapsed
   ## 4. Multiplier bootstrap, percentile CI
   list = multiBoot(X, Yadj, betaHat, n, d, alphaSeq, tau, B)
   lower005[(3 * d + 1):(4 * d), m] = list$percCI[, 1]
