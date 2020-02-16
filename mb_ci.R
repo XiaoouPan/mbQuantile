@@ -1,4 +1,4 @@
-## Confidence interval via multiplier bootstrap
+## This is the code for simulation section, confidence interval in paper
 rm(list = ls())
 
 library(quantreg)
@@ -96,7 +96,7 @@ geneMulti = function(n, d) {
 
 geneEquCor = function(n, d) {
   V = runif(d, 0.5, 1)
-  Sigma = diag(d)
+  Sigma = diag(V)
   for (i in 1:(d - 1)) {
     for (j in (i + 1):d) {
       Sigma[i, j] = Sigma[j, i] = 0.5 * sqrt(V[i] * V[j])
@@ -114,7 +114,7 @@ geneMixNoise = function(n) {
 
 getContNoise = function(n) {
   e1 = rnorm(n)
-  e2 = rnorm(n, 1, 5)
+  e2 = rnorm(n, 0, 5)
   a = rbinom(n, 1, 0.9)
   return (a * e1 + (1 - a) * e2)
 }
@@ -158,16 +158,14 @@ for (m in 1:M) {
   # t error
   #error = rt(n, df = 2)
   # mixture normal error
-  #error = geneMixNoise(n)
+  error = geneMixNoise(n)
   # contaminated error
-  error = getContNoise(n)
+  #error = getContNoise(n)
   
   # homo model
-  #Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + error
+  Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + error
   # hetero model
-  gamma = 1
-  D = 2 * diag(exp(gamma * X[, 1]) / (1 + exp(gamma * X[, 1])))
-  Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + as.numeric(D %*% error)
+  #Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + (2 * exp(X[, 1]) / (1 + exp(X[, 1]))) * error
   
   fit = rq(Y ~ X, tau = tau)
   betaHat = as.numeric(fit$coefficients)[-1]
@@ -176,32 +174,32 @@ for (m in 1:M) {
   adj = hat(X) * (tau - (res < 0)) / f0
   Yadj = Y - adj
   ## 1. Pairwise bootstrap, ET
-  list = pairBoot(fit, betaHat, alphaSeq, B)
-  lower005[1:d, m] = list$CI[, 1]
-  upper005[1:d, m] = list$CI[, 2]
-  lower01[1:d, m] = list$CI[, 3]
-  upper01[1:d, m] = list$CI[, 4]
-  lower02[1:d, m] = list$CI[, 5]
-  upper02[1:d, m] = list$CI[, 6]
-  elapsed[1] = elapsed[1] + list$elapsed 
+  #list = pairBoot(fit, betaHat, alphaSeq, B)
+  #lower005[1:d, m] = list$CI[, 1]
+  #upper005[1:d, m] = list$CI[, 2]
+  #lower01[1:d, m] = list$CI[, 3]
+  #upper01[1:d, m] = list$CI[, 4]
+  #lower02[1:d, m] = list$CI[, 5]
+  #upper02[1:d, m] = list$CI[, 6]
+  #elapsed[1] = elapsed[1] + list$elapsed 
   ## 2. Estimation function bootstrap, PWY
-  list = efBoot(fit, betaHat, alphaSeq, B)
-  lower005[(d + 1):(2 * d), m] = list$CI[, 1]
-  upper005[(d + 1):(2 * d), m] = list$CI[, 2]
-  lower01[(d + 1):(2 * d), m] = list$CI[, 3]
-  upper01[(d + 1):(2 * d), m] = list$CI[, 4]
-  lower02[(d + 1):(2 * d), m] = list$CI[, 5]
-  upper02[(d + 1):(2 * d), m] = list$CI[, 6]
-  elapsed[2] = elapsed[2] + list$elapsed 
+  #list = efBoot(fit, betaHat, alphaSeq, B)
+  #lower005[(d + 1):(2 * d), m] = list$CI[, 1]
+  #upper005[(d + 1):(2 * d), m] = list$CI[, 2]
+  #lower01[(d + 1):(2 * d), m] = list$CI[, 3]
+  #upper01[(d + 1):(2 * d), m] = list$CI[, 4]
+  #lower02[(d + 1):(2 * d), m] = list$CI[, 5]
+  #upper02[(d + 1):(2 * d), m] = list$CI[, 6]
+  #elapsed[2] = elapsed[2] + list$elapsed 
   ## 3. Wild bootstrap, FHH
-  list = wildBoot(fit, betaHat, alphaSeq, B)
-  lower005[(2 * d + 1):(3 * d), m] = list$CI[, 1]
-  upper005[(2 * d + 1):(3 * d), m] = list$CI[, 2]
-  lower01[(2 * d + 1):(3 * d), m] = list$CI[, 3]
-  upper01[(2 * d + 1):(3 * d), m] = list$CI[, 4]
-  lower02[(2 * d + 1):(3 * d), m] = list$CI[, 5]
-  upper02[(2 * d + 1):(3 * d), m] = list$CI[, 6]
-  elapsed[3] = elapsed[3] + list$elapsed
+  #list = wildBoot(fit, betaHat, alphaSeq, B)
+  #lower005[(2 * d + 1):(3 * d), m] = list$CI[, 1]
+  #upper005[(2 * d + 1):(3 * d), m] = list$CI[, 2]
+  #lower01[(2 * d + 1):(3 * d), m] = list$CI[, 3]
+  #upper01[(2 * d + 1):(3 * d), m] = list$CI[, 4]
+  #lower02[(2 * d + 1):(3 * d), m] = list$CI[, 5]
+  #upper02[(2 * d + 1):(3 * d), m] = list$CI[, 6]
+  #elapsed[3] = elapsed[3] + list$elapsed
   ## 4. Multiplier bootstrap, percentile CI
   list = multiBoot(X, Yadj, betaHat, n, d, alphaSeq, tau, B)
   lower005[(3 * d + 1):(4 * d), m] = list$percCI[, 1]
@@ -234,3 +232,4 @@ names(report) = rep(c("pair", "pwy", "wild", "mb-per", "mb-norm"), 2)
 row.names(report) = c("0.05: ", "0.1: ", "0.2: ")
 report
 
+xtable(report, digits = rep(3, 11))

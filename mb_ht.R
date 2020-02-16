@@ -1,4 +1,4 @@
-## Goodness of fit testing via multiplier bootstrap
+## This file is used for simulation section, hypothesis testing in the paper
 rm(list = ls())
 
 library(quantreg)
@@ -15,8 +15,7 @@ multiBoot = function(X, Yadj, Yadj0, res, res0, n, alphaSeq, tau = 0.5, B = 1000
     fit = rq(Yadj[idx] ~ X[idx, ], tau = tau)
     boot.res = as.numeric(fit$residuals)
     boot.res0 = Yadj0[idx] - median(Yadj0[idx])
-    mbStat[b] = 2 * (sum(abs(boot.res0)) - sum(abs(boot.res))) - 
-      2 * (sum(abs(res0[idx])) - sum(abs(res[idx])))
+    mbStat[b] = 2 * (sum(abs(boot.res0)) - sum(abs(boot.res))) - 2 * (sum(abs(res0[idx])) - sum(abs(res[idx])))
   }
   return (quantile(mbStat, probs = 1 - alphaSeq))
 }
@@ -34,7 +33,7 @@ geneMulti = function(n, d) {
 
 geneEquCor = function(n, d) {
   V = runif(d, 0.5, 1)
-  Sigma = diag(d)
+  Sigma = diag(V)
   for (i in 1:(d - 1)) {
     for (j in (i + 1):d) {
       Sigma[i, j] = Sigma[j, i] = 0.5 * sqrt(V[i] * V[j])
@@ -52,8 +51,8 @@ geneMixNoise = function(n) {
 
 getContNoise = function(n) {
   e1 = rnorm(n)
-  e2 = rnorm(n, 0, 10)
-  a = rbinom(n, 1, 0.95)
+  e2 = rnorm(n, 0, 5)
+  a = rbinom(n, 1, 0.9)
   return (a * e1 + (1 - a) * e2)
 }
 
@@ -72,9 +71,9 @@ pb = txtProgressBar(style = 3)
 for (m in 1:M) {
   set.seed(m)
   # Independent X
-  X = matrix(rnorm(n * d), n, d)
+  #X = matrix(rnorm(n * d), n, d)
   # Multivariate X with decreasing correlation
-  #X = geneMulti(n, d)
+  X = geneMulti(n, d)
   # Multivariate X with equal correlation
   #X = geneEquCor(n, d)
   
@@ -91,15 +90,17 @@ for (m in 1:M) {
   if (model == "homo") {
     Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + error
   } else if (model == "hetero") {
-    gamma = 1
-    D = 2 * diag(exp(gamma * X[, 1]) / (1 + exp(gamma * X[, 1])))
-    Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + as.numeric(D %*% error) 
+    Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + (2 * exp(X[, 1]) / (1 + exp(X[, 1]))) * error
   }
   fit = rq(Y ~ X, tau = tau)
   res = as.numeric(fit$residuals)
+  #adj = hat(X) * (tau - (res < 0)) / akj(res, z = 0)$dens
+  #Yadj = Y - adj
   res0 = Y - median(Y)
   stat = sum(abs(res0)) - sum(abs(res))
   fit0 = rq(Y ~ 1, tau = tau)
+  #adj0 = (1 / n) * (tau - (res0 < 0)) / akj(res0, z = 0)$dens
+  #Yadj0 = Y - adj0
   ## 1. ANOVA, Wald test
   test = anova(fit, fit0, test = "Wald")
   rej[, 1] = rej[, 1] + as.numeric(as.numeric(test$table[4]) < alphaSeq)
@@ -120,15 +121,18 @@ for (m in 1:M) {
   if (model == "homo") {
     Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + error
   } else if (model == "hetero") {
-    gamma = 1
-    D = 2 * diag(exp(gamma * X[, 1]) / (1 + exp(gamma * X[, 1])))
-    Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + as.numeric(D %*% error)
+    Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + (2 * exp(X[, 1]) / (1 + exp(X[, 1]))) * error
   }
   fit = rq(Y ~ X, tau = tau)
   res = as.numeric(fit$residuals)
+  #f0 = akj(res, z = 0)$dens
+  #adj = hat(X) * (tau - (res < 0)) / f0
+  #Yadj = Y - adj
   res0 = Y - median(Y)
   stat = sum(abs(res0)) - sum(abs(res))
   fit0 = rq(Y ~ 1, tau = tau)
+  #adj0 = (1 / n) * (tau - (res0 < 0)) / akj(res0, z = 0)$dens
+  #Yadj0 = Y - adj0
   ## 1. ANOVA, Wald test
   test = anova(fit, fit0, test = "Wald")
   rej[, 5] = rej[, 5] + as.numeric(as.numeric(test$table[4]) < alphaSeq)
@@ -149,15 +153,18 @@ for (m in 1:M) {
   if (model == "homo") {
     Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + error
   } else if (model == "hetero") {
-    gamma = 1
-    D = 2 * diag(exp(gamma * X[, 1]) / (1 + exp(gamma * X[, 1])))
-    Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + as.numeric(D %*% error)
+    Y = as.numeric(cbind(rep(1, n), X) %*% betaStar) + (2 * exp(X[, 1]) / (1 + exp(X[, 1]))) * error
   }
   fit = rq(Y ~ X, tau = tau)
   res = as.numeric(fit$residuals)
+  #f0 = akj(res, z = 0)$dens
+  #adj = hat(X) * (tau - (res < 0)) / f0
+  #Yadj = Y - adj
   res0 = Y - median(Y)
   stat = sum(abs(res0)) - sum(abs(res))
   fit0 = rq(Y ~ 1, tau = tau)
+  #adj0 = (1 / n) * (tau - (res0 < 0)) / akj(res0, z = 0)$dens
+  #Yadj0 = Y - adj0
   ## 1. ANOVA, Wald test
   test = anova(fit, fit0, test = "Wald")
   rej[, 9] = rej[, 9] + as.numeric(as.numeric(test$table[4]) < alphaSeq)
@@ -177,3 +184,5 @@ rej = data.frame(rej / M)
 names(rej) = rep(c("Wald", "rank", "mb-exp", "mb-Rad"), 3)
 row.names(rej) = c("0.01", "0.05", "0.1")
 rej
+
+xtable(rej, digits = rep(3, 13))
