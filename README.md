@@ -6,7 +6,7 @@ Multiplier Bootstrap for Quantile Regression
 
 We provide simulation code for the paper "Multiplier bootstrap for quantile regression: Non-asymptotic theory under random design". See [here](https://www.math.ucsd.edu/~xip024/Papers/QR_Boot.pdf) for the paper and [here](https://www.math.ucsd.edu/~xip024/Papers/QR_Supp.pdf) for the supplement. The code can reproduce numerical results in Section 3 and Appendix B.
 
-Specifically, to duplicate results in Section 3.1 and Appendix B.1, run the file **mb_ci.R** to construct confidence intervals, to replicate results in Section 3.2 and Appendix B.2, run the file **mb_ht.R** and **mb_pc.R** to conduct hypothesis testing and draw power curves. In all the files, we allow the following various settings, with details stated in the paper:
+Specifically, to duplicate results in Section 3.1 and Appendix B.1, run the file **mb_ci.R** to construct confidence intervals, to replicate results in Section 3.2 and Appendix B.2, run the files **mb_ht.R** and **mb_pc.R** to conduct hypothesis testing and draw power curves. In all the files, we allow the following various settings, with details stated in the paper:
 
 * Model type: homoscedastic model / heteroscedastic model
 * Error distribution: student's t / normal mixture type I / normal mixture type II
