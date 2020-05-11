@@ -4,7 +4,7 @@ Multiplier Bootstrap for Quantile Regression
 
 ## Description
 
-This is simulation code for the paper "Multiplier bootstrap for quantile regression: Non-asymptotic theory under random design". See [here](https://www.math.ucsd.edu/~xip024/Papers/MBQR.pdf) for the paper. The code can reproduce numerical results in Section 3 and Appendix B.
+This is simulation code for the paper "Multiplier bootstrap for quantile regression: Non-asymptotic theory under random design". See [here](https://doi.org/10.1093/imaiai/iaaa006) for the paper. The code can reproduce numerical results in Section 3 and Appendix B.
 
 Specifically, to duplicate results in Section 3.1 and Appendix B.1, run the file **mb_ci.R** to construct confidence intervals, to replicate results in Section 3.2 and Appendix B.2, run the files **mb_ht.R** and **mb_pc.R** to conduct hypothesis tests and draw power curves. In all the files, we allow the following various settings, with details stated in the paper:
 
@@ -28,7 +28,7 @@ Koenker, R. (2019). Package "quantreg". [CRAN](https://cran.r-project.org/web/pa
 
 Koenker, R. and Bassett, G. (1978). Regression quantiles. *Econometrica* **46** 33-50. [Paper](https://www.jstor.org/stable/1913643?seq=1#metadata_info_tab_contents)
 
-Pan, X. and Zhou, W.-X. (2019). Multiplier bootstrap for quantile regression: Non-asymptotic theory under random design. *Information and Inference: A Journal of the IMA*, to appear. [Paper](https://www.math.ucsd.edu/~xip024/Papers/MBQR.pdf)
+Pan, X. and Zhou, W.-X. (2019). Multiplier bootstrap for quantile regression: Non-asymptotic theory under random design. *Information and Inference: A Journal of the IMA*, to appear. [Paper](https://doi.org/10.1093/imaiai/iaaa006)
 
 Parzen, M. I., Wei, L. J. and Ying, Z. (1994). A resampling method based on pivotal estimating functions. *Biometrika* **81** 341–350. [Paper](https://academic.oup.com/biomet/article-abstract/81/2/341/468184)
 
